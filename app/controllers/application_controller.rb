@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    !!current_user #if nil, !! returns false
+    !!current_user
   end
 
   def login(user)
