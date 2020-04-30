@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resources :notes, only: [:index, :create]
 
   resource :user, only: [:create]
+
+  resource :session, only: [:create, :destroy, :show]
 end

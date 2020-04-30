@@ -10,6 +10,8 @@ import rootReducer from './frontend/reducers/root_reducer';
 
 import ErrorBoundary from './frontend/screens/error_boundary';
 
+import LoginForm from './frontend/screens/login_form';
+
 // const oldRootReducer = combineReducers({...reducers});  //ATL 1337 change to testReducer
 const store = createStore(rootReducer, applyMiddleware(thunk));
 // console.log("store:");
@@ -21,6 +23,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <ErrorBoundary>
+        <LoginForm />
         <TestHomeContainer />
       </ErrorBoundary>
     </Provider>
