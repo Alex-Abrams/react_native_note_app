@@ -1,27 +1,47 @@
 import React, { Component } from 'react';
 import { View, Button } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects'; // hmm
-// import Button from 'react-native-button';
 import { connect } from 'react-redux';
 // import { emailChanged, passwordChanged } from '../actions/';
 
 
-class LoginForm extends Component {
+class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
   // bnasically loging stuff
 
+  handleInput(type, input) {
+    // return (e) => {
+    //   this.setState({ [type]: e.target.value });
+    // };
+
+    this.setState({ [type]: input});
+
+    // this.setState({text: ''});
+  }
+
   render() {
+    console.log(this.state);
     return (
       <View style={styles.viewStyle}>
         <Hoshi
         label={'Username'}
         borderColor={'#b76c94'}
         backgroundColor={'#FFF'}
+        onChangeText={username => this.setState({username})}
         />
 
         <Hoshi
           label={'Password'}
           borderColor={'#b76c94'}
           backgroundColor={'#FFF'}
+          onChangeText={password => this.setState({password})}
           secureTextEntry
         />
 
