@@ -63,5 +63,31 @@ function getMiddle(s) { // test
     const middle = Math.floor(length / 2); //
     return s[middle];
   };
+}
 
+// solution('abc') // should return ['ab', 'c_']
+// akdlldjdllmkjdljd akjd lldj kjiijjijkkjid kjkjkjj kkjljjlj
+
+// ray leoda 
+// solution('abcdef') // should return ['ab', 'cd', 'ef']
+
+function solution(str){
+   let result = [];
+   // prolly slice(0,1)
+   const length = str.length; //6
+   for(let i = 0; i < length; i += 2) { // 0, 1, 2// i =0, 2, 4
+     let segment = str.slice(i, i + 2);
+     (segment.length === 2) ? result += segment : result += segment + '_';
+   };
+}
+
+
+function descendingOrder(n){
+  // so basically 12345 ==> 54321
+  // parseInt()... toString()
+  // .sort(), .reverse()
+  const stringInt = toString(n);
+  // "538" > "583"
+  const strArray = stringInt.split("").reverse().join("");
+  return strArray;
 }

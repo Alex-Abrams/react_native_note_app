@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects'; // hmm
 import { connect } from 'react-redux';
 // import { emailChanged, passwordChanged } from '../actions/';
@@ -17,17 +17,39 @@ class LoginForm extends React.Component {
   // bnasically loging stuff
 
   handleInput(type, input) {
-    // return (e) => {
-    //   this.setState({ [type]: e.target.value });
-    // };
-
     this.setState({ [type]: input});
-
-    // this.setState({text: ''});
   }
 
+  showCurrentUser() {
+    // console.log(this.props.currentUser.id);
+    if(!!this.props.currentUser.id) {
+      return (
+        <View>
+          <Text>
+            {this.props.currentUser.id + 'user found'}
+          </Text>
+
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <Text>
+            User not found
+          </Text>
+        </View>
+      )
+    };
+  }
+
+      // onPress={() => console.log('Pressed!!')}
+
+      // onPress={() => this.props.sessionActions.authLogin(
+      //   this.state.username, this.state.password)}>
+
   render() {
-    console.log(this.state);
+    // console.log(this.props.currentUser);
+    console.log("farts: ", this.props.currentUser);
     return (
       <View style={styles.viewStyle}>
         <Hoshi
@@ -55,9 +77,9 @@ class LoginForm extends React.Component {
             marginTop: 10
           }}
           styleDisabled={{ color: 'red' }}
-          onPress={() => console.log('Pressed!!')}
-        >
+            onPress={() => this.props.sessionActions.login(this.state)}>
         </Button>
+        {this.showCurrentUser()}
       </View>
 
 

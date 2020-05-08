@@ -1,11 +1,16 @@
 # class ApplicationController < ActionController::API
 class ApplicationController < ActionController::Base
+  # protect_from_forgery with: :null_session
+  # protect_from_forgery with: :exception # normal
+  # protect_from_forgery prepend: true  #sortak inda maybe
 
-  protect_from_forgery with: :exception
+  # skip_before_action :verify_authenticity_token, unless: csrf_required?
+
+  skip_before_action :verify_authenticity_token
 
   helper_method :current_user, :logged_in?
 
-  private
+  # private
 
   def current_user
     return nil unless session[:session_token]
