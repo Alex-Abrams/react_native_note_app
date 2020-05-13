@@ -49,7 +49,7 @@ class LoginForm extends React.Component {
 
   render() {
     // console.log(this.props.currentUser);
-    console.log("farts: ", this.props.currentUser);
+    console.log("farts: ", this.state);
     return (
       <View style={styles.viewStyle}>
         <Hoshi
@@ -69,7 +69,7 @@ class LoginForm extends React.Component {
 
         <Button
           title="Submit"
-          style={{
+          buttonStyle={{
             fontSize: 20,
             color: '#ffffff',
             backgroundColor: '#00cc00',
@@ -80,6 +80,13 @@ class LoginForm extends React.Component {
             onPress={() => this.props.sessionActions.login(this.state)}>
         </Button>
         {this.showCurrentUser()}
+
+        <Button
+          title="Signup"
+          color="purple"
+          onPress={() => this.props.sessionActions.signup(this.state)}
+          >
+        </Button>
       </View>
 
 
@@ -92,6 +99,9 @@ const styles = {
   viewStyle: {
     marginTop: 50,
     padding: 10,
+  },
+  signUp: {
+
   }
 };
 
