@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { View, Button, Text } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects'; // hmm
 import { connect } from 'react-redux';
+
+import { AsyncStorage } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
 // import { emailChanged, passwordChanged } from '../actions/';
 
 
@@ -20,9 +24,12 @@ class LoginForm extends React.Component {
     this.setState({ [type]: input});
   }
 
+
   showCurrentUser() {
     // console.log(this.props.currentUser.id);
     if(!!this.props.currentUser.id) {
+      this.props.navigation.navigate('TestHome'); //!! ok so maybe here this function can
+      // be renderErrors and render and error or take to next screen
       return (
         <View>
           <Text>
@@ -42,14 +49,76 @@ class LoginForm extends React.Component {
     };
   }
 
-      // onPress={() => console.log('Pressed!!')}
+  componentDidUpdate(prevProps) {
+    if(!!prevProps.currentUser.id) {
+      this.props.navigation.navigate('TestHome');
+    }
+  }
 
-      // onPress={() => this.props.sessionActions.authLogin(
-      //   this.state.username, this.state.password)}>
+  _renderSubmitLogin() {
+    // const navigation = useNavigation();
+    const { currentUser } = this.props;
+    return (
+      <View>
+        <Button
+          title="Submit Login"
+          color="green"
+          onPress={() => {
+            this.props.sessionActions.login(this.state);
+            {/*
+            console.log(!this.props.sessionActions.login(this.state));
+            if(!!this.props.currentUser.id) {
+              this.props.navigation.navigate('TestHome');
+            } else {
+              console.log("invalid fool");
+            };
+              try {
+              this.props.sessionActions.login(this.state)
+              .then(user => {
+              this.props.sessionActions.receiveCurrentUser(user.data);
+              this.props.navigation.navigate('TestHome');
+              })
+              } catch(error) {
+              alert("error");
+              };
+              */}
+
+
+          }}>
+        </Button>
+      </View>
+    );
+  }
+
+  onSubmit = async () => {
+    try {
+      if(!this.props.sessionActions.login(this.state)) {
+        this.props.navigation.navigate('TestHome');
+      }
+    } catch (error) {
+      alert("ERROR");
+    }
+  }
+
+ // SubmitLogin() {
+ //    const navigation = useNavigation();
+ //    return (
+ //      <View>
+ //        <Button
+ //          title="Submit Login"
+ //          color="green"
+ //          onPress={() => {
+ //            this.props.sessionActions.login(this.state);
+ //            navigation.navigate('TestHome');
+ //          }}>
+ //        </Button>
+ //      </View>
+ //    );
+ //  }
+
+
 
   render() {
-    // console.log(this.props.currentUser);
-    console.log("farts: ", this.state);
     return (
       <View style={styles.viewStyle}>
         <Hoshi
@@ -87,6 +156,8 @@ class LoginForm extends React.Component {
           onPress={() => this.props.sessionActions.signup(this.state)}
           >
         </Button>
+
+        {this._renderSubmitLogin()}
       </View>
 
 
@@ -100,9 +171,6 @@ const styles = {
     marginTop: 50,
     padding: 10,
   },
-  signUp: {
-
-  }
 };
 
 export default LoginForm;

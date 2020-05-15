@@ -20,6 +20,7 @@ def destroy
     render json: {}
   else
     render json: ["Nobody signed in"], status: 404
+    # render json: {}
   end
 end
 

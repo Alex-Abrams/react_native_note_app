@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native'
+import {View, Text, Button} from 'react-native'
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
@@ -37,18 +37,18 @@ function configureStore(initialState = {}) {
 let teststore = configureStore();
 
 
-
-function HomeScreen({ navigation }) {
+function DetailsScreen({ navigation }) {
   return (
-    <View>
-      <Text>Home Screen</Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
       <Button
-        title="Go to stuff"
-        onPress={() => navigation.navigate('TestHome')}
+        title="Go to Login Fomrm"
+        onPress={() => navigation.navigate('LoginForm')}
       />
     </View>
   );
 }
+
 
 // console.log("store:");
 // console.log(store.getState()); // yeah i can see the store!
@@ -56,7 +56,6 @@ function HomeScreen({ navigation }) {
 // window.getState = store.getState;
 // console.log(store.getState().notes.error);
 // console.log("store:");
-// <Stack.Screen name="TestHome" component={TestHomeContainer} />
 
 const Stack = createStackNavigator();
  // probably need something like if session.currentUSer then avoid the login/sign up page
@@ -66,6 +65,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRoute="LoginForm">
           <Stack.Screen name="LoginForm" component={LoginFormContainer} />
+          <Stack.Screen name="TestHome" component={TestHomeContainer} />
       </Stack.Navigator>
       </NavigationContainer>
     </Provider>

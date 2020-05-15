@@ -58,9 +58,7 @@ export default class TestHome extends Component {
     const { isFetching } = this.props;
     const notesArray = Object.values(notes);
 
-
     const fetchTest = (isFetching) ? <Text>Loading...</Text> : <Text></Text>
-
 
     return <View>{notesArray.map((note, i) =>
             <Text key={i}>{note.text}</Text>)}

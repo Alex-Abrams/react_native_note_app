@@ -14,6 +14,17 @@ export const logoutCurrentUser = () => ({
 });
 
 // original
+// export const login = user => dispatch => {
+//   axios({
+//     method: 'post',
+//     url: 'http://10.0.2.2:3000/session',
+//     data: { user }
+//   });
+  // .then(user => {
+  //   {dispatch(receiveCurrentUser(user.data))}
+  // });
+// }
+
 export const login = user => dispatch => {
   axios({
     method: 'post',
@@ -22,6 +33,9 @@ export const login = user => dispatch => {
   })
   .then(user => {
     {dispatch(receiveCurrentUser(user.data))}
+  })
+  .catch(err => {
+    console.log(err);
   });
 }
 
@@ -43,7 +57,7 @@ export const signup = (user) => dispatch => {
     data: { user },
   })
   .then(user => {
-    // console.log("user: ", user);
+    console.log("user: ", user);
     {dispatch(receiveCurrentUser(user))}
   });
 }
