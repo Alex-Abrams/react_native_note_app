@@ -57,6 +57,7 @@ function DetailsScreen({ navigation }) {
 // console.log(store.getState().notes.error);
 // console.log("store:");
 
+// console.log("TESTSTORE: ", teststore.getState());
 const Stack = createStackNavigator();
  // probably need something like if session.currentUSer then avoid the login/sign up page
 const App = () => {
@@ -64,9 +65,16 @@ const App = () => {
     <Provider store={teststore}>
       <NavigationContainer>
         <Stack.Navigator initialRoute="LoginForm">
-          <Stack.Screen name="LoginForm" component={LoginFormContainer} />
-          <Stack.Screen name="TestHome" component={TestHomeContainer} />
-      </Stack.Navigator>
+          {/*
+            {(!!teststore.getState().session.id) ? (
+            <Stack.Screen name="TestHome" component={TestHomeContainer} />
+            ) : (
+            <Stack.Screen name="LoginForm" component={LoginFormContainer} />
+            )}
+            */}
+            <Stack.Screen name="LoginForm" component={LoginFormContainer} />
+            <Stack.Screen name="TestHome" component={TestHomeContainer} />
+        </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );

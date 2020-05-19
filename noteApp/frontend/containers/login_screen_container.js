@@ -7,6 +7,7 @@ import * as sessionActions from '../actions/session_actions';
 const mapStateToProps = state => ({
   // prolly gunna want is fetching here
   currentUser: state.session, //.currentUser.username
+  isLoading: state.session.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -24,6 +24,7 @@ export default class TestHome extends Component {
   }
 
 
+
   componentDidMount() {
     this.props.noteActions.requestAllNotes();
   }
@@ -66,15 +67,32 @@ export default class TestHome extends Component {
             </View>
   }
 
+  logoutButton() {
+    return(
+      <View>
+        <Button
+          title="Logout"
+          onPress={() => {
+            this.props.sessionActions.logout();
+            this.props.navigation.navigate("LoginForm");
+          }}
+          >
+        </Button>
+      </View>
+
+    )
+  }
+
 
   render() {
     const { notes, isFetching } = this.props;
-    console.log("isFetching: ", isFetching);
+    // console.log("isFetching: ", isFetching);
 
     return(
       <View style={styles.container}>
         {this._renderNotes(notes)}
         {this._renderCreateForm()}
+        {this.logoutButton()}
         {/*
           */}
       </View>

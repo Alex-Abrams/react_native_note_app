@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 14501,
+  "expoServerNgrokUrl": "https://v9-rrm.anonymous.noteapp.exp.direct",
+  "packagerNgrokUrl": "https://packager.v9-rrm.anonymous.noteapp.exp.direct",
+  "ngrokPid": 14567,
   "webpackServerPort": null
 }

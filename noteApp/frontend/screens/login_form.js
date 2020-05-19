@@ -28,35 +28,53 @@ class LoginForm extends React.Component {
   showCurrentUser() {
     // console.log(this.props.currentUser.id);
     if(!!this.props.currentUser.id) {
-      this.props.navigation.navigate('TestHome'); //!! ok so maybe here this function can
+      // this.props.navigation.navigate('TestHome'); //!! ok so maybe here this function can
       // be renderErrors and render and error or take to next screen
-      return (
-        <View>
-          <Text>
-            {this.props.currentUser.id + 'user found'}
-          </Text>
-
-        </View>
-      );
+      return null;
     } else {
       return (
         <View>
           <Text>
-            User not found
+            Not Logged In
+
           </Text>
         </View>
       )
     };
   }
 
+  _signInHandler = async () => {
+    console.log("dicktitis");
+    const response = await this.props.sessionActions.testLogin(this.state)
+    .then(resp => {
+      console.log("resp.data:", resp.data);
+    })
+    .catch(error => {
+      console.log("FUCKING ERROR m8");
+    });
+
+
+  }
+
   componentDidUpdate(prevProps) {
-    if(!!prevProps.currentUser.id) {
+    if(this.props.currentUser.id !== prevProps.currentUser.id) {
       this.props.navigation.navigate('TestHome');
     }
   }
 
+  renderErrors() {
+    if(this.props.isLoading) {
+      return(
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    } else {
+      return null;
+    };
+  }
+
   _renderSubmitLogin() {
-    // const navigation = useNavigation();
     const { currentUser } = this.props;
     return (
       <View>
@@ -64,58 +82,12 @@ class LoginForm extends React.Component {
           title="Submit Login"
           color="green"
           onPress={() => {
-            this.props.sessionActions.login(this.state);
-            {/*
-            console.log(!this.props.sessionActions.login(this.state));
-            if(!!this.props.currentUser.id) {
-              this.props.navigation.navigate('TestHome');
-            } else {
-              console.log("invalid fool");
-            };
-              try {
-              this.props.sessionActions.login(this.state)
-              .then(user => {
-              this.props.sessionActions.receiveCurrentUser(user.data);
-              this.props.navigation.navigate('TestHome');
-              })
-              } catch(error) {
-              alert("error");
-              };
-              */}
-
-
+            this.props.sessionActions.testLogin(this.state);
           }}>
         </Button>
       </View>
     );
   }
-
-  onSubmit = async () => {
-    try {
-      if(!this.props.sessionActions.login(this.state)) {
-        this.props.navigation.navigate('TestHome');
-      }
-    } catch (error) {
-      alert("ERROR");
-    }
-  }
-
- // SubmitLogin() {
- //    const navigation = useNavigation();
- //    return (
- //      <View>
- //        <Button
- //          title="Submit Login"
- //          color="green"
- //          onPress={() => {
- //            this.props.sessionActions.login(this.state);
- //            navigation.navigate('TestHome');
- //          }}>
- //        </Button>
- //      </View>
- //    );
- //  }
-
 
 
   render() {
@@ -146,7 +118,7 @@ class LoginForm extends React.Component {
             marginTop: 10
           }}
           styleDisabled={{ color: 'red' }}
-            onPress={() => this.props.sessionActions.login(this.state)}>
+            onPress={() => this._signInHandler}>
         </Button>
         {this.showCurrentUser()}
 
@@ -158,6 +130,7 @@ class LoginForm extends React.Component {
         </Button>
 
         {this._renderSubmitLogin()}
+        {this.renderErrors()}
       </View>
 
 
