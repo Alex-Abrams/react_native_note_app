@@ -75,7 +75,6 @@ class LoginForm extends React.Component {
   }
 
   _renderSubmitLogin() {
-    const { currentUser } = this.props;
     return (
       <View>
         <Button
@@ -91,6 +90,7 @@ class LoginForm extends React.Component {
 
 
   render() {
+    // console.log(this.props);
     return (
       <View style={styles.viewStyle}>
         <Hoshi
@@ -125,7 +125,7 @@ class LoginForm extends React.Component {
         <Button
           title="Signup"
           color="purple"
-          onPress={() => this.props.sessionActions.signup(this.state)}
+          onPress={() => this.props.sessionActions.testSignup(this.state)}
           >
         </Button>
 

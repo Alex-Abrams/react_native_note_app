@@ -25,33 +25,9 @@ export const failedLogin = (error) => ({
   error,
 });
 
-// orriginal
-// export const testLogin = user => dispatch => {
-//   dispatch(loadSpinner());
-//   axios({
-//     method: 'post',
-//     url: 'http://10.0.2.2:3000/session',
-//     data: { user }
-//   }).then((response) => {
-//     console.log("STATUS =>", response.status);
-//     if (response.status === 401) {
-//       console.log('AUTHENTICATION ERROR!!zip!!');
-//       dispatch(failedLogin("failedLogin error"));
-//
-//     } else {
-//       console.log("reponse=> ", response);
-//       (response).then(response => {
-//         console.log("DATA =>", response.data);
-//         {dispatch(receiveCurrentUser(response.data))};
-//       });
-//     };
-//   });
-//   // .then(user => {
-//   //   {dispatch(receiveCurrentUser(user.data))}
-//   // });
-// };/// COMEBACK HERES
 
-
+// works really well! important to generate something for native to load
+// on screen IE {isLoading: }
 export const testLogin = user => dispatch => {
   dispatch(loadSpinner());
   axios({
@@ -71,27 +47,40 @@ export const testLogin = user => dispatch => {
       dispatch(failedLogin("failedLogin error"));
     };
   });
-  // .then(user => {
-  //   {dispatch(receiveCurrentUser(user.data))}
-  // });
-};/// COMEBACK HERES
 
+};///
 
-export const login = user => dispatch => {
+// works like a gosh darn charm
+export const testSignup = (user) => dispatch => {
+  dispatch(loadSpinner());
   axios({
     method: 'post',
-    url: 'http://10.0.2.2:3000/session',
+    url: 'http://10.0.2.2:3000/users',
     data: { user }
-  })
-  .then(user => {
-    {dispatch(loadSpinner())};
-    {dispatch(receiveCurrentUser(user.data))};
-  })
-  .catch(err => {
-    console.log(err);
+  }).then((response) => {
+    console.log("SIGNUP STATUS=> ", response.status);
+    if (response.status === 200) {
+      {dispatch(receiveCurrentUser(response.data))};
+    } else {
+      console.log('SIGN UP ERROR');
+      dispatch(failedLogin("sign up error!"))
+    };
   });
-}
+};
 
+
+// export const testLogout = () => dispatch => {
+//   dispatch(loadSpinner());
+//   axios({
+//     method: 'delete',
+//     url: 'http://10.0.2.2:3000/session',
+//   }).then((response) => {
+//     console.log(response.status);
+//     if(reponse.status === 200) {
+//
+//     }
+//   })
+// }
 
 export const logout = () => dispatch => {
   axios({
@@ -114,3 +103,47 @@ export const signup = (user) => dispatch => {
     {dispatch(receiveCurrentUser(user))}
   });
 }
+
+export const login = user => dispatch => {
+  axios({
+    method: 'post',
+    url: 'http://10.0.2.2:3000/session',
+    data: { user }
+  })
+  .then(user => {
+    {dispatch(loadSpinner())};
+    {dispatch(receiveCurrentUser(user.data))};
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+
+
+
+// orriginal
+// export const testLogin = user => dispatch => {
+  //   dispatch(loadSpinner());
+  //   axios({
+    //     method: 'post',
+    //     url: 'http://10.0.2.2:3000/session',
+    //     data: { user }
+    //   }).then((response) => {
+      //     console.log("STATUS =>", response.status);
+      //     if (response.status === 401) {
+        //       console.log('AUTHENTICATION ERROR!!zip!!');
+        //       dispatch(failedLogin("failedLogin error"));
+        //
+        //     } else {
+          //       console.log("reponse=> ", response);
+          //       (response).then(response => {
+            //         console.log("DATA =>", response.data);
+            //         {dispatch(receiveCurrentUser(response.data))};
+            //       });
+            //     };
+            //   });
+            //   // .then(user => {
+              //   //   {dispatch(receiveCurrentUser(user.data))}
+              //   // });
+              // };/// COMEBACK HERES
