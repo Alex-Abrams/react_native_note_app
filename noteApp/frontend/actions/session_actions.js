@@ -36,6 +36,7 @@ export const testLogin = user => dispatch => {
     data: { user }
   }).then((response) => {
     console.log("STATUS =>", response.status);
+    console.log("token???", response.token);
     if (response.status === 200) {
       // console.log("reponse=> ", response);
       // (response).then(response => {
@@ -69,18 +70,38 @@ export const testSignup = (user) => dispatch => {
 };
 
 
-// export const testLogout = () => dispatch => {
-//   dispatch(loadSpinner());
-//   axios({
-//     method: 'delete',
-//     url: 'http://10.0.2.2:3000/session',
-//   }).then((response) => {
-//     console.log(response.status);
-//     if(reponse.status === 200) {
-//
-//     }
-//   })
-// }
+export const testLogout = () => dispatch => {
+  dispatch(loadSpinner());
+  axios({
+    method: 'delete',
+    url: 'http://10.0.2.2:3000/session',
+  })
+  .then((response) => {
+    console.log("response: ", response);
+    if(reponse.status === 200) {
+      {dispatch(logoutCurrentUser(response))}
+    } else {
+      console.log("status", response.status);
+    };
+  });
+};
+
+
+
+////////////////////////////////////////////////
+export const testUpdate = () =>  dispatch => {
+  dispatch(loadSpinner());
+  axios({
+    method: 'patch',
+    url: 'http://10.0.2.2:3000/session',
+  });
+};
+// //////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////
+
 
 export const logout = () => dispatch => {
   axios({
@@ -118,32 +139,3 @@ export const login = user => dispatch => {
     console.log(err);
   });
 }
-
-
-
-
-// orriginal
-// export const testLogin = user => dispatch => {
-  //   dispatch(loadSpinner());
-  //   axios({
-    //     method: 'post',
-    //     url: 'http://10.0.2.2:3000/session',
-    //     data: { user }
-    //   }).then((response) => {
-      //     console.log("STATUS =>", response.status);
-      //     if (response.status === 401) {
-        //       console.log('AUTHENTICATION ERROR!!zip!!');
-        //       dispatch(failedLogin("failedLogin error"));
-        //
-        //     } else {
-          //       console.log("reponse=> ", response);
-          //       (response).then(response => {
-            //         console.log("DATA =>", response.data);
-            //         {dispatch(receiveCurrentUser(response.data))};
-            //       });
-            //     };
-            //   });
-            //   // .then(user => {
-              //   //   {dispatch(receiveCurrentUser(user.data))}
-              //   // });
-              // };/// COMEBACK HERES

@@ -28,7 +28,7 @@ const sessionReducer = (state = _nullUser, action) => {
     case FAILED_LOGIN:
       return merge({}, {isLoading: false}, {error: action.error});
     case LOGOUT_CURRENT_USER:
-      return _nullUser;
+      return ({}, state, _nullUser);
     default:
       return state;
   }

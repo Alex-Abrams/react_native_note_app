@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_221134) do
+ActiveRecord::Schema.define(version: 2020_05_28_172036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "lifts", force: :cascade do |t|
+    t.string "lift", null: false
+    t.string "sets_lifts_weight", null: false
+    t.integer "lift_num", null: false
+    t.integer "heaviest", null: false
+    t.integer "workout_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["workout_id"], name: "index_lifts_on_workout_id"
+  end
 
   create_table "notes", force: :cascade do |t|
     t.string "text"

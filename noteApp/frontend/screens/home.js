@@ -25,14 +25,6 @@ export default class Home extends Component {
   componentDidMount() {
     this.props.noteActions.fetchNotes();
     console.log(fetch('http://10.0.2.2:3000/notes'));
-// fetch('http://192.168.1.23/notes');
-//     fetch('https://api.github.com/orgs/nodejs')
-    // fetch('https://192.168.1.23:5000/notes')
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.log(data) // Prints result from `response.json()` in getRequest
-    // }) //
-    // .catch(error => console.error(error))
   }
 
   ///////////////
@@ -51,11 +43,6 @@ export default class Home extends Component {
 
   _renderNotes() {
     const {notes, status} = this.props.notes;
-    // console.log("notes: ", notes);
-    // console.log(notes);
-    // console.log("helllllllllllo");
-    // console.log(this.props);
-    // console.log("helllllllllllo");
     if (status === 'failure') {
       return <Text>{'Error'}</Text>;
     } else if (status == 'loading') {
@@ -80,7 +67,6 @@ export default class Home extends Component {
 
   render() {
     console.log("PROPS: ", this.props);
-    // console.log("MERGE TEST: ", this.testMerge());
     return (
       <ScrollView style={styles.container}>
         <Text>testing stufff</Text>

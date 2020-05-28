@@ -21,12 +21,16 @@ export default class TestHome extends Component {
       text: "",
     };
 
+
   }
 
 
 
   componentDidMount() {
     this.props.noteActions.requestAllNotes();
+    // fetch('http://10.0.2.2:3000/notes')
+    // // .then(response => console.log(response.json())); // so this totally works but its wierd _55 thing
+    // .then(response => console.log("respooooooonse", response));
   }
 
   _createNote = () => {
@@ -73,8 +77,8 @@ export default class TestHome extends Component {
         <Button
           title="Logout"
           onPress={() => {
-            this.props.sessionActions.logout();
-            this.props.navigation.navigate("LoginForm");
+            this.props.sessionActions.testLogout();
+            // this.props.navigation.navigate("LoginForm");
           }}
           >
         </Button>
@@ -83,10 +87,36 @@ export default class TestHome extends Component {
     )
   }
 
+  // _testResponse = async () => {
+  //   const response = await fetch('http://10.0.2.2:3000/notes', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   },
+  //   }).then(response => {
+  //     console.log("_testreponse ", response);
+  //   }).catch(error => {
+  //     console.log("_testReponse fooking error ", error);
+  //   });
+  // };
+
+  testResponseButton() {
+    return(
+      <View>
+        <Button
+          title="RESPONSETEST"
+          onPress={() => {
+            this._testReponse();
+          }}>
+        </Button>
+      </View>
+    )
+  }
+
 
   render() {
     const { notes, isFetching } = this.props;
-    // console.log("isFetching: ", isFetching);
 
     return(
       <View style={styles.container}>
